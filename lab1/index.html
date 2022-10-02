@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Lab1</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="inputContainer">
-        <label for="value1">Value 1</label>
+        <label for="value1">Value 1<button class="delete">Delete</button></label>
         <input type="number" name="value1" id="val1" value=1>
-        <label for="value2">Value 2</label>
+        <label for="value2">Value 2<button class="delete">Delete</button></label>
         <input type="number" name="value2" id="val2" value=1>
-        <label for="value3">Value 3</label>
+        <label for="value3">Value 3<button class="delete">Delete</button></label>
         <input type="number" name="value3" id="val3" value=1>
         <button id="add">Dodaj pole</button>
     </div>
-    <div class= "inputContainer">
+    <div class="inputContainer">
         <span id="sum"></span>
         <span id="avg"></span>
         <span id="min"></span>
         <span id="max"></span>
     </div>
-        <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
