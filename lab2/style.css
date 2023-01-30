@@ -1,0 +1,51 @@
+#slider {
+    width: 600px;
+    height: 400px;
+    margin: 100px auto 0 auto;
+    overflow: hidden;
+}
+
+#slider .slides {
+    display: flex;
+    animation-name: pociag-w-lewo;
+    animation-duration: 4s;
+    animation-delay: 1s;
+    animation-timing-function: ease-in-out;
+    height: 400px;
+}
+
+.slides>* {
+    min-width: 600px;
+    width: 600px;
+    height: 400px;
+}
+
+#controls {
+    height: 50px;
+    display: flex;
+    margin: 0 auto;
+    width: 600px;
+    justify-content: space-between;
+}
+
+a.next,
+a.prev {
+    text-decoration: none;
+    color: black;
+    font-size: 800;
+}
+
+a.next {
+    right: 0px;
+}
+
+.dot {
+    cursor: pointer;
+}
+
+#pause {
+    margin: 0 auto;
+    width: 150px;
+    height: 30px;
+    display: block;
+}
