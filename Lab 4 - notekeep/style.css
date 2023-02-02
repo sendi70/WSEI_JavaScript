@@ -1,0 +1,32 @@
+.notesContainer {
+    display: flex;
+}
+
+.note {
+    width: 200px;
+    height: 250px;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+}
+
+.noteHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.noteContenst {
+    flex: 15;
+}
+
+.note p {
+    flex: 1;
+}
