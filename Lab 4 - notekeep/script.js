@@ -4,17 +4,30 @@ const colorInput = document.querySelector('#color')
 const addButton = document.querySelector('#addNote')
 const notesContainer = document.querySelector('.notesContainer')
 
+let editingNote = null;
+
 addButton.addEventListener('click', addNote)
 
 function addNote() {
-    const note = buildNoteJSON();
+    const noteId = generateUUID();
+    let note;
+    if (editingNote != null) {
+        note = buildNoteJSON(editingNote);
+        const existingNode = document.getElementById(editingNote)
+        existingNode.replaceWith(document.createRange().createContextualFragment(buildNoteNode(note)))
+        editingNote = null;
+        addButton.innerText = 'Add note'
+    }
+    else {
+        note = buildNoteJSON(noteId);
+        notesContainer.insertAdjacentHTML('beforeEnd', buildNoteNode(note))
+    }
     localStorage.setItem(note.id, JSON.stringify(note))
-    notesContainer.insertAdjacentHTML('beforeEnd', buildNoteNode(note))
 }
 
-function buildNoteJSON() {
+function buildNoteJSON(noteId) {
     let note = {}
-    note.id = generateUUID();
+    note.id = noteId
     note.title = titleInput.value;
     note.contenst = contenstInput.value;
     note.color = colorInput.value;
@@ -24,12 +37,12 @@ function buildNoteJSON() {
 function buildNoteNode(note) {
     let noteContainer = `<div class="note" id=${note.id} style="background-color:${note.color}">
             <div class="noteHeader">
-                <h2>${note.title}</h2>
                 <div class="controls">    
                     <button id="pinButton" onclick="pinNote(this)">PIN</button>
                     <button id="deleteButton" onclick="deleteNote(this)">Delete</button>
                     <button id="editButton" onclick="editNote(this)">Edit</button>
                 </div>
+                <h2>${note.title}</h2>
             </div>
             <div class="noteContenst">
                 ${note.contenst}
@@ -57,8 +70,14 @@ function deleteNote(e) {
 }
 
 function editNote(e) {
+    addButton.innerText = 'Edit note'
     noteId = e.parentNode.parentNode.parentNode.id;
-
+    editingNote = noteId;
+    noteNode = document.getElementById(editingNote);
+    noteJson = JSON.parse(localStorage.getItem(noteId));
+    titleInput.value = noteJson.title;
+    contenstInput.value = noteJson.contenst;
+    colorInput.value = noteJson.color
 }
 
 const generateUUID = () => {
