@@ -1,8 +1,14 @@
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+run()
 
-await measurePerformance('add 1', () => addData1(data), data)
-await measurePerformance('add 2', () => addData2(data), data)
-await measurePerformance('add 3', () => addData3(data), data)
+function generateArray(len, maxValue) {
+  return Array.from({ length: len }, () => Math.floor(Math.random() * maxValue))
+}
+
+async function run() {
+  let data = generateArray(100, 100)
+  await measurePerformance('for', () => addData1(data))
+  await measurePerformance('parallel', () => addData2(data))
+}
 
 // for z await
 async function addData1(data) {
@@ -12,20 +18,11 @@ async function addData1(data) {
   }
   return sum
 }
-// reduce z sum jako Promise
-async function addData2(data) {
-  console.log('reduce start')
-  const resultPromise = data.reduce(async (sumPromise, item) => {
-    const sumValue = await sumPromise
-    return asyncAdd(sumValue, item)
-  }, 0)
-  console.log('reduce end')
-  return resultPromise
-}
-// równoległe operacje
-async function addData3(values) {
-  let data = [...values]
 
+
+// równoległe operacje
+async function addData2(values) {
+  let data = [...values]
   while (data.length > 1) {
     let asyncTempSums = []
     while (data.length > 0) {
@@ -41,12 +38,14 @@ async function addData3(values) {
   }
   return data.pop()
 }
+
+
 async function measurePerformance(name, cb) {
   console.log(`Start: ${name}`);
-  performance.mark('mf-start')
+  performance.mark('start')
   const result = await cb()
-  performance.mark('mf-end')
-  const runTime = performance.measure('Czas wykonania kodu', 'mf-start', 'mf-end')
+  performance.mark('end')
+  const runTime = performance.measure('Czas wykonania kodu', 'start', 'end')
   console.log(`Wynik z ${name}: ${result}`)
   console.log(`Czas wykonywania: ${runTime.duration.toFixed(2)}ms`)
 }
