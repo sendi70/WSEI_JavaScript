@@ -2,23 +2,18 @@
 
 <head>
     <link rel="stylesheet" href="style.css">
-    <canvas id="myCanvas"></canvas>
     <div id="test">
         <div id="fps">--fps</div>
-        <div id="stats">
-            <div id="balls">Balls:</div>
-            <dov id="length">Length:20%</dov>
-        </div>
-        <input type="range" min="1" max="400" value="230" step="1" id="slider">
-        <input type="range" min="1" max="100" value="20" step="1" id="slength">
         <div id="buttons">
+            <label for="balls" id="balls">Balls: </label>
+            <input type="range" min="1" max="400" value="230" step="1" id="slider" name="balls">
+            <label for="length" id="length">Length: 20%</label>
+            <input type="range" min="1" max="100" value="20" step="1" id="slength" name="length">
             <button id="start" onClick="initialize()">Start</button>
             <button id="stop" onClick="stop()">Stop</button>
         </div>
     </div>
-    <style>
-
-    </style>
+    <canvas id="myCanvas"></canvas>
     <script src="script.js"></script>
 
     </body>

@@ -5,6 +5,7 @@ const slength = document.getElementById("slength")
 slider.addEventListener('change', ballCountUpdate)
 slider.addEventListener('input', ballCountUpdate)
 slength.addEventListener('onchange', lineLengthUpdate)
+slength.addEventListener('input', lineLengthUpdate)
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 const ctx = canvas.getContext("2d")
